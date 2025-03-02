@@ -5,8 +5,10 @@ int main() {
     // DECLARAÇÃO DAS VARIÁVEIS DA CARTA1 E CARTA2
     char estado1, estado2;
     char cod_carta1[5], cod_carta2[5], cidade1[40], cidade2[40];
-    int populacao1, populacao2, pontos_turisticos1, pontos_turisticos2;
-    float area1, area2, PIB1, PIB2, densi_populacional1, densi_populacional2, PIB_per_capita1, PIB_per_capita2;
+    unsigned long int populacao1, populacao2;
+    int pontos_turisticos1, pontos_turisticos2;
+    float area1, area2, PIB1, PIB2, densi_populacional1, densi_populacional2, PIB_per_capita1, 
+    PIB_per_capita2, super_poder1, super_poder2;
 
     printf("DADOS CARTA 1 ----->\n");
     printf("Estado: ");
@@ -22,7 +24,7 @@ int main() {
     cidade1[strcspn(cidade1, "\n")] = 0; // REMOVE O \n DE fgets
 
     printf("População: ");
-    scanf("%d", &populacao1);
+    scanf("%lu", &populacao1);
 
     printf("Área em Km²: ");
     scanf("%f", &area1);
@@ -48,7 +50,7 @@ int main() {
     cidade2[strcspn(cidade2, "\n")] = 0; // REMOVE O \n DE fgets
 
     printf("População: ");
-    scanf("%d", &populacao2);
+    scanf("%lu", &populacao2);
 
     printf("Área em Km²: ");
     scanf("%f", &area2);
@@ -64,32 +66,62 @@ int main() {
     densi_populacional1 = populacao1 / area1;
     densi_populacional2 = populacao2 / area2;
 
+    //CALCULANDO O SUPER PODER DA CARTA 1
+    super_poder1 = (area1 / populacao1) + populacao1 + area1 + PIB1 + pontos_turisticos1 + PIB_per_capita1;
+
     //CALCULANDO O PIB PER CAPITA
     PIB_per_capita1 = PIB1 / populacao1;
     PIB_per_capita2 = PIB2 / populacao2;
+
+    //CALCULANDO O SUPER PODER DA CARTA 2
+    super_poder2 = (area2 / populacao2) + populacao2 + area2 + PIB2 + pontos_turisticos2 + PIB_per_capita2;
+
+    //CALCULANDO O SUPER PODER DE CADA CARTA
+
 
     // EXIBIÇÃO DOS RESULTADOS
     printf("\nCarta1:\n");
     printf("Estado: %c\n", estado1);
     printf("Código: %s\n", cod_carta1);
     printf("Nome da cidade: %s\n", cidade1);
-    printf("Populção: %d\n", populacao1);
+    printf("População: %lu \n", populacao1);
     printf("Área: %.2f km² \n", area1);
     printf("PIB: %.2f bilhões de reais\n", PIB1);
     printf("Número de pontos turísticos: %d\n", pontos_turisticos1);
     printf("Densidade Populacional: %.2f hab/km²\n", densi_populacional1);
-    printf("PIB per Capita: %.2f reais\n", PIB_per_capita1);
+    printf("PIB per Capita: %.6f reais\n", PIB_per_capita1);
+    printf("Super poder: %.2f\n", super_poder1);
 
     printf("\nCarta2:\n");
     printf("Estado: %c\n", estado2);
     printf("Código: %s\n", cod_carta2);
     printf("Nome da cidade: %s\n", cidade2);
-    printf("Populção: %d\n", populacao2);
+    printf("População: %lu\n", populacao2);
     printf("Área: %.2f km² \n", area2);
     printf("PIB: %.2f bilhões de reais\n", PIB2);
     printf("Número de pontos turísticos: %d\n", pontos_turisticos2);
     printf("Densidade Populacional: %.2f hab/km²\n", densi_populacional2);
-    printf("PIB per Capita: %.2f reais\n", PIB_per_capita2);
+    printf("PIB per Capita: %.6f reais\n", PIB_per_capita2);
+    printf("Super poder: %.2f\n", super_poder2);
+
+    // REALIZANDO A COMPARAÇÃO ENTRE CARTAS
+    printf("\nComparação de cartas:\n");
+
+    //LÓGICA DA COMPARAÇÃO ->
+    /*
+    SE POPULACAO1 > POLULACAO2:
+       CARTA %D -> CARTA 1
+    SENÃO
+       CARTA %D -> CARTA 2
+       
+    */
+    printf("População: Carta %d venceu (%d)\n", (populacao1 > populacao2) ? 1 : 2, (populacao1 > populacao2)); // (populcao1 > populacao2) RETORNA 0 -> CARTA2 OU 1 -> CARTA1
+    printf("Área: Carta %d venceu (%d)\n", (area1 > area2) ? 1 : 2, (area1 > area2));
+    printf("PIB: Carta %d venceu (%d)\n", (PIB1 > PIB2) ? 1 : 2, (PIB1 > PIB2));
+    printf("Pontos Turísticos: Carta %d venceu (%d)\n", (pontos_turisticos1 > pontos_turisticos2) ? 1 : 2, (pontos_turisticos1 > pontos_turisticos2));
+    printf("Densidade populacional: Carta %d venceu (%d)\n", (densi_populacional1 < densi_populacional2) ? 1 : 2, (area1 < area2));
+    printf("PIB per Capita: Carta %d venceu (%d)\n", (PIB_per_capita1 > PIB_per_capita2) ? 1 : 2, (PIB_per_capita1 > PIB_per_capita2));
+    printf("Super poder: Carta %d venceu (%d)\n", (super_poder1 > super_poder2) ? 1 : 2, (super_poder1 > super_poder2));
 
     return 0;
 }
