@@ -67,14 +67,14 @@ int main() {
     densi_populacional2 = populacao2 / area2;
 
     //CALCULANDO O SUPER PODER DA CARTA 1
-    super_poder1 = (area1 / populacao1) + populacao1 + area1 + PIB1 + pontos_turisticos1 + PIB_per_capita1;
+    super_poder1 = (1 / densi_populacional1) + populacao1 + area1 + PIB1 + pontos_turisticos1 + PIB_per_capita1;
 
     //CALCULANDO O PIB PER CAPITA
     PIB_per_capita1 = PIB1 / populacao1;
     PIB_per_capita2 = PIB2 / populacao2;
 
     //CALCULANDO O SUPER PODER DA CARTA 2
-    super_poder2 = (area2 / populacao2) + populacao2 + area2 + PIB2 + pontos_turisticos2 + PIB_per_capita2;
+    super_poder2 = (1 / densi_populacional2) + populacao2 + area2 + PIB2 + pontos_turisticos2 + PIB_per_capita2;
 
     //CALCULANDO O SUPER PODER DE CADA CARTA
 
