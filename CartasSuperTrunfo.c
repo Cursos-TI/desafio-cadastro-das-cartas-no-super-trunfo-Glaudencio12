@@ -4,25 +4,21 @@
 int main()
 {
    // DECLARAÇÃO DAS VARIÁVEIS DA CARTA1 E CARTA2
-   char estado1, estado2;
-   char cod_carta1[5], cod_carta2[5], cidade1[40], cidade2[40];
+   char pais1[20], pais2[20];
+   char cod_carta1[5], cod_carta2[5];
    unsigned long int populacao1, populacao2;
-   int pontos_turisticos1, pontos_turisticos2;
+   int pontos_turisticos1, pontos_turisticos2, escolha_usuario;
    float area1, area2, PIB1, PIB2, densi_populacional1, densi_populacional2, PIB_per_capita1,
-       PIB_per_capita2, super_poder1, super_poder2;
+   PIB_per_capita2, super_poder1, super_poder2;
 
    printf("DADOS CARTA 1 ----->\n");
-   printf("Estado: ");
-   estado1 = getchar(); // LÊ UM ÚNICO CARACTERE PARA O ESTADO
-   getchar();           // LIMPA O \n DEIXADO NO BUFFER PELO ÚLTIMO SCANF
+   printf("País: ");
+   fgets(pais1, sizeof(pais1), stdin);
+   pais1[strcspn(pais1, "\n")] = 0;
 
    printf("Código da carta: ");
    fgets(cod_carta1, sizeof(cod_carta1), stdin); // LÊ ENTRADAS COM ESPAÇO, POR EXEMPLO: SÃO PAULO
    cod_carta1[strcspn(cod_carta1, "\n")] = 0;    // REMOVE O \n DE fgets
-
-   printf("Cidade: ");
-   fgets(cidade1, sizeof(cidade2), stdin); // LÊ ENTRADAS COM ESPAÇO, POR EXEMPLO: SÃO PAULO
-   cidade1[strcspn(cidade1, "\n")] = 0;    // REMOVE O \n DE fgets
 
    printf("População: ");
    scanf("%lu", &populacao1);
@@ -38,17 +34,13 @@ int main()
    getchar();
 
    printf("\nDADOS CARTA 2 ----->\n");
-   printf("Estado: ");
-   estado2 = getchar();
-   getchar(); // LIMPA O \n DEIXADO NO BUFFER PELO ÚLTIMO SCANF
+   printf("País: ");
+   fgets(pais2, sizeof(pais2), stdin);
+   pais2[strcspn(pais2, "\n")] = 0;
 
    printf("Código da carta: ");
    fgets(cod_carta2, sizeof(cod_carta2), stdin); // LÊ ENTRADAS COM ESPAÇO, POR EXEMPLO: SÃO PAULO
    cod_carta2[strcspn(cod_carta2, "\n")] = 0;    // REMOVE O \n DE fgets
-
-   printf("Cidade: ");
-   fgets(cidade2, sizeof(cidade2), stdin); // LÊ ENTRADAS COM ESPAÇO, POR EXEMPLO: SÃO PAULO
-   cidade2[strcspn(cidade2, "\n")] = 0;    // REMOVE O \n DE fgets
 
    printf("População: ");
    scanf("%lu", &populacao2);
@@ -79,9 +71,8 @@ int main()
 
    // EXIBIÇÃO DOS RESULTADOS
    printf("\nCarta1:\n");
-   printf("Estado: %c\n", estado1);
+   printf("País: %s\n", pais1);
    printf("Código: %s\n", cod_carta1);
-   printf("Nome da cidade: %s\n", cidade1);
    printf("População: %lu \n", populacao1);
    printf("Área: %.2f km² \n", area1);
    printf("PIB: %.2f bilhões de reais\n", PIB1);
@@ -91,9 +82,8 @@ int main()
    printf("Super poder: %.2f\n", super_poder1);
 
    printf("\nCarta2:\n");
-   printf("Estado: %c\n", estado2);
+   printf("País: %s\n", pais2);
    printf("Código: %s\n", cod_carta2);
-   printf("Nome da cidade: %s\n", cidade2);
    printf("População: %lu\n", populacao2);
    printf("Área: %.2f km² \n", area2);
    printf("PIB: %.2f bilhões de reais\n", PIB2);
@@ -102,18 +92,122 @@ int main()
    printf("PIB per Capita: %.6f reais\n", PIB_per_capita2);
    printf("Super poder: %.2f\n", super_poder2);
 
-   // COMPARANDO O ATRIBUTO QUE DETERMINARÁ A CARTA VENCEDORA
-   printf("\nComparação de cartas (Atributo: PIB)\n");
-   
-   if (PIB1 > PIB2){ // SE O PIB1 FOR MAIOR QUE O PIB2, CARTA 1 VENCEU
-      printf("Carta 1 - %s (%s): %.2f \n", cidade1, cod_carta1, PIB1);
-      printf("Carta 2 - %s (%s): %.2f \n", cidade2, cod_carta2, PIB2);
-      printf("Resultado: Carta 1 (%s) venceu\n!", cidade1);
-   }else{ // SE O PIB1 NÃO FOR MAIOR QUE O PIB2, CARTA 2 VENCEU
-      printf("Carta 1 - %s (%s): %.2f \n", cidade1, cod_carta1, PIB1);
-      printf("Carta 2 - %s (%s): %.2f \n", cidade2, cod_carta2, PIB2);
-      printf("Resultado: Carta 2 (%s) venceu\n!", cidade2);
-   }
+   // COMPARANDO AS CARTAS CONFORME A ESCOLHA DE ATRIBUTO PELO USUÁRIO
+   // MENU DE OPÇOES
+   printf("\n===========MENU===========\n");
+   printf("ESCOLHA UM ATRIBUTO DE COMPARAçÃO ENTRE AS DUAS CARTAS:\n");
+   printf("1 - População\n");
+   printf("2 - Área\n");
+   printf("3 - PIB\n");
+   printf("4 - Número de pontos turísticos\n");
+   printf("5 - Densidade demográfica\n");
+   printf("ESCOLHA UMA OPÇÃO: ");
+   scanf("%d", &escolha_usuario); // VARIÁVEL DE CONTROLE DO SWITCH
 
+   switch (escolha_usuario){
+   case 1:
+      // EXIBINDO AS INFORMAÇÕES COMPLEMENTARES DO RESULTADO DA COMPARAÇÃO
+      printf("\nPaís1: %s\n", pais1);
+      printf("País2: %s\n", pais2);
+      printf("Atributo cmparado: População\n");
+      printf("Valor do atributo para a Carta 1: %lu\n", populacao1);
+      printf("Valor do atributo para a Carta 2: %lu\n", populacao2);  
+
+      if (populacao1 != populacao2){ // VERIFICA SE OS VALORES SÃO DIFERENTES, SE FOREM, PASSA PARA O IF ANINHADO
+         if (populacao1 > populacao2){ // VERIFICA QUAL É MAIOR
+            printf("Vencedor: Carta 1 - País: %s \n", pais1);
+         }
+         else{
+            printf("Vencedor: Carta 2 - País: %s \n", pais2);
+         }
+      }else{ // SE OS VALORES FOREM IGUAIS A INSTRUÇÃO DENTRO DO ELSE É EXECUTADA
+         printf("Empate na comparação\n");
+      }
+      break;
+
+   case 2:
+      // EXIBINDO AS INFORMAÇÕES COMPLEMENTARES DO RESULTADO DA COMPARAÇÃO
+      printf("\nPaís: %s\n", pais1);
+      printf("País2: %s\n", pais2);
+      printf("Atributo cmparado: Área\n");
+      printf("Valor do atributo para a Carta 1: %.2f\n", area1);
+      printf("Valor do atributo para a Carta 2: %.2f\n", area2);
+
+      if (area1 != area2){ // VERIFICA SE OS VALORES SÃO DIFERENTES, SE FOREM, PASSA PARA O IF ANINHADO
+         if (area1 > area2){ // VERIFICA QUAL É MAIOR
+            printf("Vencedor: Carta 1 - País: %s \n", pais1);
+         }
+         else{
+            printf("Vencedor: Carta 2 - País: %s \n", pais2);
+         }
+      }else{ // SE OS VALORES FOREM IGUAIS A INSTRUÇÃO DENTRO DO ELSE É EXECUTADA
+         printf("Empate na comparação\n");
+      }
+      break;
+
+   case 3: 
+      // EXIBINDO AS INFORMAÇÕES COMPLEMENTARES DO RESULTADO DA COMPARAÇÃO
+      printf("\nPaís: %s\n", pais1);
+      printf("País2: %s\n", pais2);
+      printf("Atributo cmparado: PIB\n");
+      printf("Valor do atributo para a Carta 1: %.2f\n", PIB1);
+      printf("Valor do atributo para a Carta 2: %.2f\n", PIB2);
+
+      if (PIB1 != PIB2){  // VERIFICA SE OS VALORES SÃO DIFERENTES, SE FOREM, PASSA PARA O IF ANINHADO
+         if (PIB1 > PIB2){  // VERIFICA QUAL É MAIOR
+            printf("Vencedor: Carta 1 - País: %s \n", pais1);
+         }
+         else{
+            printf("Vencedor: Carta 2 - País: %s \n", pais2);
+         }
+      }else{  // SE OS VALORES FOREM IGUAIS A INSTRUÇÃO DENTRO DO ELSE É EXECUTADA
+         printf("Empate na comparação\n");
+      }
+      break;  
+      
+   case 4:
+      // EXIBINDO AS INFORMAÇÕES COMPLEMENTARES DO RESULTADO DA COMPARAÇÃO
+      printf("\nPaís: %s\n", pais1);
+      printf("País2: %s\n", pais2);
+      printf("Atributo cmparado: Pontos Turísticos\n");
+      printf("Valor do atributo para a Carta 1: %d\n", pontos_turisticos1);
+      printf("Valor do atributo para a Carta 2: %d\n", pontos_turisticos2); 
+      
+      if (pontos_turisticos1 != pontos_turisticos2){ // VERIFICA SE OS VALORES SÃO DIFERENTES, SE FOREM, PASSA PARA O IF ANINHADO
+         if (pontos_turisticos1 > pontos_turisticos2){ // VERIFICA QUAL É MAIOR
+            printf("Vencedor: Carta 1 - País: %s \n", pais1);
+         }
+         else{
+            printf("Vencedor: Carta 2 - País: %s \n", pais2);
+         }
+      }else{ // SE OS VALORES FOREM IGUAIS A INSTRUÇÃO DENTRO DO ELSE É EXECUTADA
+         printf("Empate na comparação\n");
+      }
+      break; 
+
+   case 5:
+      // EXIBINDO AS INFORMAÇÕES COMPLEMENTARES DO RESULTADO DA COMPARAÇÃO
+      printf("\nPaís: %s\n", pais1);
+      printf("País2: %s\n", pais2);
+      printf("Atributo cmparado: PIB\n");
+      printf("Valor do atributo para a Carta 1: %.2f\n", densi_populacional1);
+      printf("Valor do atributo para a Carta 2: %.2f\n", densi_populacional2);
+
+      if (densi_populacional1 != densi_populacional2){ // VERIFICA SE OS VALORES SÃO DIFERENTES, SE FOREM, PASSA PARA O IF ANINHADO
+         if (densi_populacional1 < densi_populacional2){ // VERIFICA QUAL É MAIOR
+            printf("Vencedor: Carta 1 - País: %s \n", pais1);
+         }
+         else{
+            printf("Vencedor: Carta 2 - País: %s \n", pais2);
+         }
+      }else{ // SE OS VALORES FOREM IGUAIS A INSTRUÇÃO DENTRO DO ELSE É EXECUTADA
+         printf("Empate na comparação\n");
+      }
+      break; 
+
+   default:
+      printf("Opcão inválida");
+      break;   
+   }
    return 0;
 }
