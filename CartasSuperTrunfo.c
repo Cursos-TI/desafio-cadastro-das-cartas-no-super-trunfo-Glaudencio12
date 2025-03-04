@@ -7,9 +7,9 @@ int main()
    char pais1[20], pais2[20];
    char cod_carta1[5], cod_carta2[5];
    unsigned long int populacao1, populacao2;
-   int pontos_turisticos1, pontos_turisticos2, escolha_usuario;
+   int pontos_turisticos1, pontos_turisticos2, escolha_usuario1, escolha_usuario2, resultado1, resultado2;
    float area1, area2, PIB1, PIB2, densi_populacional1, densi_populacional2, PIB_per_capita1,
-   PIB_per_capita2, super_poder1, super_poder2;
+       PIB_per_capita2, super_poder1, super_poder2;
 
    printf("DADOS CARTA 1 ----->\n");
    printf("País: ");
@@ -29,7 +29,7 @@ int main()
    printf("PIB: ");
    scanf("%f", &PIB1);
 
-   printf("Númeor de pontos turísticos: ");
+   printf("Número de pontos turísticos: ");
    scanf("%d", &pontos_turisticos1);
    getchar();
 
@@ -92,122 +92,122 @@ int main()
    printf("PIB per Capita: %.6f reais\n", PIB_per_capita2);
    printf("Super poder: %.2f\n", super_poder2);
 
-   // COMPARANDO AS CARTAS CONFORME A ESCOLHA DE ATRIBUTO PELO USUÁRIO
+   // COMPARANDO AS CARTAS CONFORME OS ATRIBUTOS ESCOLHIDOS PELO USUÁRIO
    // MENU DE OPÇOES
    printf("\n===========MENU===========\n");
-   printf("ESCOLHA UM ATRIBUTO DE COMPARAÇÃO ENTRE AS DUAS CARTAS:\n");
+   printf("ESCOLHA O PRIMEIRO ATRIBUTO DE COMPARAÇÃO ENTRE AS DUAS CARTAS:\n");
    printf("1 - População\n");
    printf("2 - Área\n");
    printf("3 - PIB\n");
    printf("4 - Número de pontos turísticos\n");
    printf("5 - Densidade demográfica\n");
    printf("ESCOLHA UMA OPÇÃO: ");
-   scanf("%d", &escolha_usuario); // VARIÁVEL DE CONTROLE DO SWITCH
-   
-   switch (escolha_usuario){
-      case 1:
-         // EXIBINDO AS INFORMAÇÕES COMPLEMENTARES DO RESULTADO DA COMPARAÇÃO
-         printf("\nPaís1: %s\n", pais1);
-         printf("País2: %s\n", pais2);
-         printf("Atributo cmparado: População\n");
-         printf("Valor do atributo para a Carta 1: %lu\n", populacao1);
-         printf("Valor do atributo para a Carta 2: %lu\n", populacao2);  
+   scanf("%d", &escolha_usuario1); // VARIÁVEL DE CONTROLE DO SWITCH
 
-         if (populacao1 != populacao2){ // VERIFICA SE OS VALORES SÃO DIFERENTES, SE FOREM, PASSA PARA O IF ANINHADO
-            if (populacao1 > populacao2){ // VERIFICA QUAL É MAIOR
-               printf("Vencedor: Carta 1 - País: %s \n", pais1);
-            }
-            else{
-               printf("Vencedor: Carta 2 - País: %s \n", pais2);
-            }
-         }else{ // SE OS VALORES FOREM IGUAIS A INSTRUÇÃO DENTRO DO ELSE É EXECUTADA
-            printf("Empate na comparação\n");
-         }
+   switch (escolha_usuario1)
+   {
+   case 1:
+      resultado1 = (populacao1 > populacao2) ? 1 : 0;
+      break;
+
+   case 2:
+      resultado1 = (area1 > area2) ? 1 : 0;
+      break;
+
+   case 3:
+      resultado1 = (PIB1 > PIB2) ? 1 : 0;
+      break;
+
+   case 4:
+      resultado1 = (pontos_turisticos1 > pontos_turisticos2) ? 1 : 0;
+      break;
+
+   case 5:
+      resultado1 = (densi_populacional1 < densi_populacional2) ? 1 : 0;
+      break;
+
+   default:
+      printf("Opcão inválida");
+      break;
+   }
+
+   printf("\n===========MENU===========\n");
+   printf("ESCOLHA O PRIMEIRO ATRIBUTO DE COMPARAÇÃO ENTRE AS DUAS CARTAS:\n");
+   printf("1 - População\n");
+   printf("2 - Área\n");
+   printf("3 - PIB\n");
+   printf("4 - Número de pontos turísticos\n");
+   printf("5 - Densidade demográfica\n");
+   printf("ESCOLHA UMA OPÇÃO: ");
+   scanf("%d", &escolha_usuario2); // VARIÁVEL DE CONTROLE DO SWITCH
+
+   if (escolha_usuario1 == escolha_usuario2) // VERIFICA SE AS DUAS ESCOLHAS SÃO IGUAIS, SE FOREM, O PROGRAMA PARA A EXECUÇÃO
+   {
+      printf("\nVocê não pode escolher o mesmo atributo para a comparação. Tente novamente.\n");
+   }
+   else // SE OS DOIS ATRIBUTOS NÃO FOREM IGUAIS, A COMPARAÇÃO É REALIZADA
+   {
+      switch (escolha_usuario2)
+      {
+      case 1:
+         resultado2 = (populacao1 > populacao2) ? 1 : 0;
          break;
 
       case 2:
-         // EXIBINDO AS INFORMAÇÕES COMPLEMENTARES DO RESULTADO DA COMPARAÇÃO
-         printf("\nPaís: %s\n", pais1);
-         printf("País2: %s\n", pais2);
-         printf("Atributo cmparado: Área\n");
-         printf("Valor do atributo para a Carta 1: %.2f\n", area1);
-         printf("Valor do atributo para a Carta 2: %.2f\n", area2);
-
-         if (area1 != area2){ // VERIFICA SE OS VALORES SÃO DIFERENTES, SE FOREM, PASSA PARA O IF ANINHADO
-            if (area1 > area2){ // VERIFICA QUAL É MAIOR
-               printf("Vencedor: Carta 1 - País: %s \n", pais1);
-            }
-            else{
-               printf("Vencedor: Carta 2 - País: %s \n", pais2);
-            }
-         }else{ // SE OS VALORES FOREM IGUAIS A INSTRUÇÃO DENTRO DO ELSE É EXECUTADA
-            printf("Empate na comparação\n");
-         }
+         resultado2 = (area1 > area2) ? 1 : 0;
          break;
 
-      case 3: 
-         // EXIBINDO AS INFORMAÇÕES COMPLEMENTARES DO RESULTADO DA COMPARAÇÃO
-         printf("\nPaís: %s\n", pais1);
-         printf("País2: %s\n", pais2);
-         printf("Atributo cmparado: PIB\n");
-         printf("Valor do atributo para a Carta 1: %.2f\n", PIB1);
-         printf("Valor do atributo para a Carta 2: %.2f\n", PIB2);
+      case 3:
+         resultado2 = (PIB1 > PIB2) ? 1 : 0;
+         break;
 
-         if (PIB1 != PIB2){  // VERIFICA SE OS VALORES SÃO DIFERENTES, SE FOREM, PASSA PARA O IF ANINHADO
-            if (PIB1 > PIB2){  // VERIFICA QUAL É MAIOR
-               printf("Vencedor: Carta 1 - País: %s \n", pais1);
-            }
-            else{
-               printf("Vencedor: Carta 2 - País: %s \n", pais2);
-            }
-         }else{  // SE OS VALORES FOREM IGUAIS A INSTRUÇÃO DENTRO DO ELSE É EXECUTADA
-            printf("Empate na comparação\n");
-         }
-         break;  
-         
       case 4:
-         // EXIBINDO AS INFORMAÇÕES COMPLEMENTARES DO RESULTADO DA COMPARAÇÃO
-         printf("\nPaís: %s\n", pais1);
-         printf("País2: %s\n", pais2);
-         printf("Atributo cmparado: Pontos Turísticos\n");
-         printf("Valor do atributo para a Carta 1: %d\n", pontos_turisticos1);
-         printf("Valor do atributo para a Carta 2: %d\n", pontos_turisticos2); 
-         
-         if (pontos_turisticos1 != pontos_turisticos2){ // VERIFICA SE OS VALORES SÃO DIFERENTES, SE FOREM, PASSA PARA O IF ANINHADO
-            if (pontos_turisticos1 > pontos_turisticos2){ // VERIFICA QUAL É MAIOR
-               printf("Vencedor: Carta 1 - País: %s \n", pais1);
-            }
-            else{
-               printf("Vencedor: Carta 2 - País: %s \n", pais2);
-            }
-         }else{ // SE OS VALORES FOREM IGUAIS A INSTRUÇÃO DENTRO DO ELSE É EXECUTADA
-            printf("Empate na comparação\n");
-         }
-         break; 
+         resultado2 = (pontos_turisticos1 > pontos_turisticos2) ? 1 : 0;
+         break;
 
       case 5:
-         // EXIBINDO AS INFORMAÇÕES COMPLEMENTARES DO RESULTADO DA COMPARAÇÃO
-         printf("\nPaís: %s\n", pais1);
-         printf("País2: %s\n", pais2);
-         printf("Atributo cmparado: PIB\n");
-         printf("Valor do atributo para a Carta 1: %.2f\n", densi_populacional1);
-         printf("Valor do atributo para a Carta 2: %.2f\n", densi_populacional2);
-
-         if (densi_populacional1 != densi_populacional2){ // VERIFICA SE OS VALORES SÃO DIFERENTES, SE FOREM, PASSA PARA O IF ANINHADO
-            if (densi_populacional1 < densi_populacional2){ // VERIFICA QUAL É MAIOR
-               printf("Vencedor: Carta 1 - País: %s \n", pais1);
-            }
-            else{
-               printf("Vencedor: Carta 2 - País: %s \n", pais2);
-            }
-         }else{ // SE OS VALORES FOREM IGUAIS A INSTRUÇÃO DENTRO DO ELSE É EXECUTADA
-            printf("Empate na comparação\n");
-         }
-         break; 
+         resultado2 = (densi_populacional1 < densi_populacional2) ? 1 : 0;
+         break;
 
       default:
          printf("Opcão inválida");
-         break;   
+         break;
       }
+
+      // EXIBINDO OS RESULTADOS DA COMPARAÇÃO
+      printf("\n========== RESULTADOS ==========\n");
+      printf("País 1: %s\n", pais1);
+      printf("País 2: %s\n", pais2);
+      printf("Atributos da Carta 1 escolhidos: ");
+
+      // EXIBINDO OS ATRIBUTOS ESCOLHIDOS, JUNTAMENTE COM SEUS VALORES
+      if (escolha_usuario1 == 1)printf("População ---> %lu\n", populacao1);
+      else if (escolha_usuario1 == 2)printf("Área ---> %.2f\n", area1);
+      else if (escolha_usuario1 == 3)printf("PIB ---> %.2f\n", PIB1);
+      else if (escolha_usuario1 == 4)printf("Número de pontos turísticos ---> %d\n", pontos_turisticos1);
+      else if (escolha_usuario1 == 5)printf("Densidade demográfica ---> %2.f\n", densi_populacional1);
+
+      if (escolha_usuario2 == 1)printf("População ---> %lu\n", populacao2);
+      else if (escolha_usuario2 == 2)printf("Área ---> %.2f\n", area2);
+      else if (escolha_usuario2 == 3)printf("PIB ---> %.2f\n", PIB2);
+      else if (escolha_usuario2 == 4)printf("Número de pontos turísticos ---> %d\n", pontos_turisticos2);
+      else if (escolha_usuario2 == 5)printf("Densidade demográfica ---> %2.f\n", densi_populacional2);
+
+      // EXIBINDO O RESULTADO FINAL APÓS A SOMA DOS ATRIBUTOS
+      printf("\nResultado da comparação:\n");
+      if (resultado1 + resultado2 == 2)
+      {
+         printf("A carta 1 venceu!\n");
+      }
+      else if (resultado1 + resultado2 == 0)
+      {
+         printf("A carta 2 venceu!\n");
+      }
+      else
+      {
+         printf("Empate!\n");
+      }
+   }
+
    return 0;
 }
