@@ -1,75 +1,93 @@
 #include <stdio.h>
 #include <string.h>
 
+// Jogo Super Trunfo desenvolvido nos 2 primeiro temas da disciplina Introdução à Programação de computadores
+// O jogo foi desenvolvido em diferentes fases, que variam do Nível Novato ao Nível Mestre, sendo este o nível atual disponível.
+
 int main()
 {
-   // DECLARAÇÃO DAS VARIÁVEIS DA CARTA1 E CARTA2
+   // Declaração das variáveis utilizadas para o cadastro de informações das duas cartas
    char pais1[20], pais2[20];
    char cod_carta1[5], cod_carta2[5];
    unsigned long int populacao1, populacao2;
-   int pontos_turisticos1, pontos_turisticos2, escolha_usuario1, escolha_usuario2, resultado1, resultado2;
-   float area1, area2, PIB1, PIB2, densi_populacional1, densi_populacional2, PIB_per_capita1,
-       PIB_per_capita2, super_poder1, super_poder2;
+   int pontos_turisticos1, pontos_turisticos2;
+   float area1, area2, PIB1, PIB2;
 
+   //Coletando o nome do país da carta 1 digitado pelo usuário
    printf("DADOS CARTA 1 ----->\n");
    printf("País: ");
-   fgets(pais1, sizeof(pais1), stdin);
-   pais1[strcspn(pais1, "\n")] = 0;
+   fgets(pais1, sizeof(pais1), stdin); // Substitui o scanf para permitir a leitura de entradas que contêm espaços, como "Estados Unidos".  
+   pais1[strcspn(pais1, "\n")] = 0; // Remove a quebra de linha que o fgets captura ao ler o dado
 
+   //Coletando o código da carta1 digitado pelo usuário
    printf("Código da carta: ");
-   fgets(cod_carta1, sizeof(cod_carta1), stdin); // LÊ ENTRADAS COM ESPAÇO, POR EXEMPLO: SÃO PAULO
-   cod_carta1[strcspn(cod_carta1, "\n")] = 0;    // REMOVE O \n DE fgets
+   fgets(cod_carta1, sizeof(cod_carta1), stdin); // Substitui o scanf para permitir a leitura de entradas que contêm espaços, como "Estados Unidos".
+   cod_carta1[strcspn(cod_carta1, "\n")] = 0;    //  Remove a quebra de linha que o fgets captura ao ler o dado
 
+   //Coletando a população da carta 1 digitada pelo usuário
    printf("População: ");
    scanf("%lu", &populacao1);
 
+   //Coletando a área do país da carta 1 digitada pelo usuário
    printf("Área em Km²: ");
    scanf("%f", &area1);
 
+   //Coletando o PIB do país da carta 1 digitado pelo usuário
    printf("PIB: ");
    scanf("%f", &PIB1);
 
+   //Coletando a quantidade de pontos turísticos do país da carta 1 digitada pelo usuário
    printf("Número de pontos turísticos: ");
    scanf("%d", &pontos_turisticos1);
    getchar();
 
    printf("\nDADOS CARTA 2 ----->\n");
-   printf("País: ");
-   fgets(pais2, sizeof(pais2), stdin);
-   pais2[strcspn(pais2, "\n")] = 0;
 
+   //Coletando o nome do país da carta 2 digitado pelo usuário
+   printf("País: ");
+   fgets(pais2, sizeof(pais2), stdin); //Substitui o scanf para permitir a leitura de entradas que contêm espaços, como "Estados Unidos".
+   pais2[strcspn(pais2, "\n")] = 0; // Remove a quebra de linha que o fgets captura ao ler o dado
+   
+   //Coletando o código da carta 2 digitado pelo usuário
    printf("Código da carta: ");
    fgets(cod_carta2, sizeof(cod_carta2), stdin); // LÊ ENTRADAS COM ESPAÇO, POR EXEMPLO: SÃO PAULO
    cod_carta2[strcspn(cod_carta2, "\n")] = 0;    // REMOVE O \n DE fgets
 
+   //Coletando a população da carta 2 digitada pelo usuário
    printf("População: ");
    scanf("%lu", &populacao2);
 
+   //Coletando a área do país da carta 2 digitada pelo usuário
    printf("Área em Km²: ");
    scanf("%f", &area2);
 
+   //Coletando o PIB do país da carta 2 digitado pelo usuário
    printf("PIB: ");
    scanf("%f", &PIB2);
 
+   //Coletando a quantidade de pontos turísticos do país da carta 2 digitada pelo usuário
    printf("Número de pontos turísticos: ");
    scanf("%d", &pontos_turisticos2);
-   getchar(); // LIMPA O \n DEIXADO NO BUFFER PELO ÚLTIMO SCANF
+   getchar(); //Remove o caractere de nova linha que ficou no buffer após a execução do scanf(), garantindo que a próxima leitura não seja afetada
 
-   // CALCULANDO A DENSIDADE POPULACIONAL
+   //Declaração das variáveis que serão utilizadas no cálculo da Renda per Capita, Densidade Populacional e Super Poder das duas cartas
+   float densi_populacional1, densi_populacional2, PIB_per_capita1, PIB_per_capita2, super_poder1, super_poder2;
+
+   // Calculando a densidade populacional das dos dois países das duas cartas
    densi_populacional1 = populacao1 / area1;
    densi_populacional2 = populacao2 / area2;
 
-   // CALCULANDO O SUPER PODER DA CARTA 1
+   // Calculando o super poder do país da carta 1
    super_poder1 = (1 / densi_populacional1) + populacao1 + area1 + PIB1 + pontos_turisticos1 + PIB_per_capita1;
 
-   // CALCULANDO O PIB PER CAPITA
+   // Calculando o PIB per Capita dos dois países das duas cartas
    PIB_per_capita1 = PIB1 / populacao1;
    PIB_per_capita2 = PIB2 / populacao2;
 
-   // CALCULANDO O SUPER PODER DA CARTA 2
+   // Calculando o super poder do país da carta 2
    super_poder2 = (1 / densi_populacional2) + populacao2 + area2 + PIB2 + pontos_turisticos2 + PIB_per_capita2;
 
-   // EXIBIÇÃO DOS RESULTADOS
+   //Exibindo todas as informações cadastradas sobre a carta 1
    printf("\nCarta1:\n");
    printf("País: %s\n", pais1);
    printf("Código: %s\n", cod_carta1);
@@ -81,6 +99,7 @@ int main()
    printf("PIB per Capita: %.6f reais\n", PIB_per_capita1);
    printf("Super poder: %.2f\n", super_poder1);
 
+   //Exibindo todas as informações cadastradas sobre a carta 2
    printf("\nCarta2:\n");
    printf("País: %s\n", pais2);
    printf("Código: %s\n", cod_carta2);
@@ -92,8 +111,10 @@ int main()
    printf("PIB per Capita: %.6f reais\n", PIB_per_capita2);
    printf("Super poder: %.2f\n", super_poder2);
 
-   // COMPARANDO AS CARTAS CONFORME OS ATRIBUTOS ESCOLHIDOS PELO USUÁRIO
-   // MENU DE OPÇOES
+   // Declaração das variáveis que serão utilizadas na comparação dos atributos das duas cartas
+   int escolha_usuario1, escolha_usuario2, resultado1, resultado2;
+
+   //Primeiro menu de opções
    printf("\n===========MENU===========\n");
    printf("ESCOLHA O PRIMEIRO ATRIBUTO DE COMPARAÇÃO ENTRE AS DUAS CARTAS:\n");
    printf("1 - População\n");
@@ -102,8 +123,9 @@ int main()
    printf("4 - Número de pontos turísticos\n");
    printf("5 - Densidade demográfica\n");
    printf("ESCOLHA UMA OPÇÃO: ");
-   scanf("%d", &escolha_usuario1); // VARIÁVEL DE CONTROLE DO SWITCH
+   scanf("%d", &escolha_usuario1);  // Variável que irá armazenar o primeiro atributo que o usuário escolher
 
+   //Switch que irá controlar a comparação do primeiro atributo escolhido
    switch (escolha_usuario1)
    {
    case 1:
@@ -131,6 +153,7 @@ int main()
       break;
    }
 
+   // Segundo menu de opções
    printf("\n===========MENU===========\n");
    printf("ESCOLHA O PRIMEIRO ATRIBUTO DE COMPARAÇÃO ENTRE AS DUAS CARTAS:\n");
    printf("1 - População\n");
@@ -139,13 +162,14 @@ int main()
    printf("4 - Número de pontos turísticos\n");
    printf("5 - Densidade demográfica\n");
    printf("ESCOLHA UMA OPÇÃO: ");
-   scanf("%d", &escolha_usuario2); // VARIÁVEL DE CONTROLE DO SWITCH
+   scanf("%d", &escolha_usuario2); // Variável que irá armazenar o primeiro atributo que o usuário escolher
 
-   if (escolha_usuario1 == escolha_usuario2) // VERIFICA SE AS DUAS ESCOLHAS SÃO IGUAIS, SE FOREM, O PROGRAMA PARA A EXECUÇÃO
+   // Verifica se as duas opções escolhidas pelo usuário são iguais. Se sim, o programa para a execução
+   if (escolha_usuario1 == escolha_usuario2)
    {
       printf("\nVocê não pode escolher o mesmo atributo para a comparação. Tente novamente.\n");
    }
-   else // SE OS DOIS ATRIBUTOS NÃO FOREM IGUAIS, A COMPARAÇÃO É REALIZADA
+   else //Se os dois atributos não forem iguais, o Switch que irá controlar a comparação do segundo atributo é acionado
    {
       switch (escolha_usuario2)
       {
@@ -174,13 +198,13 @@ int main()
          break;
       }
 
-      // EXIBINDO OS RESULTADOS DA COMPARAÇÃO
-      printf("\n========== RESULTADOS ==========\n");
+      // Exibindo as informações obtidas na comparação do dois atributos das duas cartas
+      printf("\n========== Informações da comparação ==========\n");
       printf("País 1: %s\n", pais1);
       printf("País 2: %s\n", pais2);
       printf("Atributos da Carta 1 escolhidos: ");
 
-      // EXIBINDO OS ATRIBUTOS ESCOLHIDOS, JUNTAMENTE COM SEUS VALORES
+      // Exibindo os dois atributos escolhido pelo usuário e seus respectivos valores
       if (escolha_usuario1 == 1)printf("População ---> %lu\n", populacao1);
       else if (escolha_usuario1 == 2)printf("Área ---> %.2f\n", area1);
       else if (escolha_usuario1 == 3)printf("PIB ---> %.2f\n", PIB1);
@@ -193,7 +217,7 @@ int main()
       else if (escolha_usuario2 == 4)printf("Número de pontos turísticos ---> %d\n", pontos_turisticos2);
       else if (escolha_usuario2 == 5)printf("Densidade demográfica ---> %2.f\n", densi_populacional2);
 
-      // EXIBINDO O RESULTADO FINAL APÓS A SOMA DOS ATRIBUTOS
+      //Exibindo o resultado final após a comparção e soma dos atributos
       printf("\nResultado da comparação:\n");
       if (resultado1 + resultado2 == 2)
       {
